@@ -21,7 +21,7 @@ def primes_list(number):
             # Check if for loop fully executed
             if (divisor == primes[-1]) and (seek % divisor != 0): 
                 primes.append(seek)
-            seek += 1
+            seek += 2
         return primes
 
 if __name__ == "__main__":
