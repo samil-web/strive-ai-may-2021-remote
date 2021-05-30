@@ -1,2 +1,1 @@
-This is to simulate a merge conflict.
-Adding new commit on master branch
+This is change added to feature branch
