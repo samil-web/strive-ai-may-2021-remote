@@ -14,9 +14,17 @@ soup = BeautifulSoup(page, "html.parser")
 periods = [period.get_text(separator = ' ') for period in soup.find_all('p', class_ = 'period-name')]
 description = [period.get_text(separator = ' ') for period in soup.find_all('p', class_ = 'short-desc')]
 temperatures = [period.get_text(separator = ' ') for period in soup.find_all('p', class_ = 'temp')]
-# print(periods)
-# print(description)
-# print(temperatures)
-print(np.array([periods, description, temperatures]).transpose())
-df = pd.DataFrame(data = np.array([periods, description, temperatures]).transpose(), columns = ['Day','Description','Temperatures'])
+
+def celsius_scale(temperature_string):
+    temperature = int(temperature_string.split()[1])
+    return str(round((temperature-32)*(5/9), 1)) + u" \N{DEGREE SIGN}C"
+
+temperatures_celsius = []
+for temperature in temperatures:
+    temperatures_celsius.append(celsius_scale(temperature))
+
+# print(temperatures_celsius)
+
+# print(np.array([periods, description, temperatures]).transpose())
+df = pd.DataFrame(data = np.array([periods, description, temperatures_celsius]).transpose(), columns = ['Day','Description','Temperatures'])
 print(df)
